@@ -1,5 +1,6 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import ReactDOM from "react-dom";
+import "./index.css";
 
 class Toggle extends React.Component {
   constructor(props) {
@@ -139,6 +140,36 @@ class Clocks2 extends React.Component {
   }
 }
 
+class Modal2 extends React.Component {
+  //  let sert =
+  user = {
+    firstName: "Andrei",
+    lastName: "Harenkov",
+  };
+
+  constructor() {
+    super();
+    this.state = { time: new Date() }; // initialise the state
+    var _this = React.Component.call(this) || this;
+    return _this;
+  }
+
+  render() {
+  const { time } = this.state; // retrieve the time from state
+    return (
+      <div>
+      <button type="button">открыть окно</button>
+      
+      <div class="modal">
+        <p>Это модальное окно</p>
+        {/* print the string prettily */}
+        <button class="btn-close" type="button">закрыть окно</button>
+      </div></div>
+    );
+  }
+}
+
+
 //ReactDOM.render(<Toggle />, document.getElementById("root"));
 
 //const element = <h1>Привет, мир!</h1>;
@@ -151,6 +182,7 @@ ReactDOM.render(
     <Hello name="World" />
     <Toggle />
     <Clocks2 />
+    <Modal2 />
   </div>,
   document.getElementById("root")
 );
