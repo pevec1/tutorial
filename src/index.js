@@ -19,8 +19,8 @@ class Toggle extends React.Component {
       <div>
         <button onClick={this.handleClick}>{"Структура сайта "}</button>
         {this.state.isToggleOn
-          ? "<p>раскрыть</p>"
-          : "<p>Главная</p><p>Портфолио</p><p>Мое творчество</p><p>Фотогалерея</p><p>Контакты</p><p></p>"}
+          ? <p>раскрыть</p>
+          : <div><p>Главная</p><p>Портфолио</p><p>Мое творчество</p><p>Фотогалерея</p><p>Контакты</p><p></p></div>}
       </div>
     );
   }
@@ -149,22 +149,55 @@ class Modal2 extends React.Component {
 
   constructor() {
     super();
-    this.state = { time: new Date() }; // initialise the state
+    this.state = {isToggleOn: true};
+    // Эта привязка обязательна для работы `this` в колбэке.    
+    this.handleClick = this.handleClick.bind(this);  
     var _this = React.Component.call(this) || this;
     return _this;
   }
 
+  formatModal() {
+    let modal = document.querySelector(".modal");
+     modal.classList.add("modal", "btn-close");
+  }
+
+   handleClick() {    
+     this.setState(prevState => ({     
+        isToggleOn: !prevState.isToggleOn    
+      }));  
+    }
+
+  //handleClick = () => {
+  //  console.log("значение this:", this.formatModal());
+  //};
+
   render() {
-  const { time } = this.state; // retrieve the time from state
+    //  let className = "menu";
+    //  if (this.props.isActive) {
+    //    className += " menu-active";
+    //  }
+
     return (
       <div>
-      <button type="button">открыть окно</button>
-      
-      <div class="modal">
-        <p>Это модальное окно</p>
-        {/* print the string prettily */}
-        <button class="btn-close" type="button">закрыть окно</button>
-      </div></div>
+        <button type="button" onClick={this.handleClick}>модальное окно</button>
+        {this.state.isToggleOn ? (
+          <div className="modal-close" >
+            <p>Это модальное окно</p>
+
+            {/* <button class="btn-close" type="button">
+              закрыть окно
+            </button> */}
+          </div>
+        ) : (
+           <div className="modal">
+            <p>Это модальное окно</p>
+
+            {/* <button class="btn" type="button">
+              закрыть окно
+            </button> */}
+          </div>
+       )}
+      </div>
     );
   }
 }
